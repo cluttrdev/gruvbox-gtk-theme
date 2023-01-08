@@ -65,7 +65,7 @@ $darker_asset_suffix: if($mode=='dark', '-dark', $asset_suffix);
 .view,
 %view {
   color: $text_color;
-  background-color: $base_color;
+  background-color: $bg_color;
 
   &:selected {
     &, &:focus {
@@ -84,7 +84,7 @@ textview {
   }
 }
 
-textview border { background-color: mix($bg_color, $base_color, 50%); }
+textview border { background-color: $color_gray; }
 
 iconview { @extend .view; }
 
@@ -2671,13 +2671,13 @@ row {
 //
 .app-notification {
   padding: 10px;
-  color: $dark_sidebar_fg;
-  background-color: $dark_sidebar_bg;
+  color: $sidebar_fg;
+  background-color: $sidebar_bg;
   background-clip: border-box;
   border-radius: 0 0 2px 2px;
   border-width: 0 1px 1px 1px;
   border-style: solid;
-  border-color: darken($dark_sidebar_bg, 10%);
+  border-color: darken($sidebar_bg, 10%);
 
   border { border: none; }
 

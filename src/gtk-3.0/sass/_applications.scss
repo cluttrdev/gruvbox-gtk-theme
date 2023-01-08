@@ -344,8 +344,8 @@ sushi-media-bin box.overlay-bar { @extend %osd; }
   }
 
   scrolledwindow.sidebar treeview.view {
-    background: $dark_sidebar_bg;
-    color: $dark_sidebar_fg;
+    background: $sidebar_bg;
+    color: $sidebar_fg;
     
     &:selected, &:active {
       background: $selected_bg_color;

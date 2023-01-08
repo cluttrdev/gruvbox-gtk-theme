@@ -1,0 +1,157 @@
+$GB_DARK0_HARD:     #1d2021;
+$GB_DARK0:          #282828;
+$GB_DARK0_SOFT:     #32302f;
+$GB_DARK1:          #3c3836;
+$GB_DARK2:          #504945;
+$GB_DARK3:          #665c54;
+$GB_DARK4:          #7c6f64;
+
+$GB_GRAY:           #928374;
+
+$GB_LIGHT0_HARD:    #f9f5d7;
+$GB_LIGHT0:         #fbf1c7;
+$GB_LIGHT0_SOFT:    #f2e5bc;
+$GB_LIGHT1:         #ebdbb2;
+$GB_LIGHT2:         #d5c4a1;
+$GB_LIGHT3:         #bdae93;
+$GB_LIGHT4:         #a89984;
+
+$GB_BRIGHT_RED:     #fb4934;
+$GB_BRIGHT_GREEN:   #b8bb26;
+$GB_BRIGHT_YELLOW:  #fabd2f;
+$GB_BRIGHT_BLUE:    #83a598;
+$GB_BRIGHT_PURPLE:  #d3869b;
+$GB_BRIGHT_AQUA:    #8ec07c;
+$GB_BRIGHT_ORANGE:  #fe8019;
+
+$GB_NEUTRAL_RED:    #cc241d;
+$GB_NEUTRAL_GREEN:  #98971a;
+$GB_NEUTRAL_YELLOW: #d79921;
+$GB_NEUTRAL_BLUE:   #458588;
+$GB_NEUTRAL_PURPLE: #b16286;
+$GB_NEUTRAL_AQUA:   #689d6a;
+$GB_NEUTRAL_ORANGE: #d65d0e;
+
+$GB_FADED_RED:      #9d0006;
+$GB_FADED_GREEN:    #79740e;
+$GB_FADED_YELLOW:   #b57614;
+$GB_FADED_BLUE:     #076678;
+$GB_FADED_PURPLE:   #8f3f71;
+$GB_FADED_AQUA:     #427b58;
+$GB_FADED_ORANGE:   #af3a03;
+
+// ========
+
+// variables in control flow cannot declare new ones
+// in outer scope, only assign to existing once.
+// (https://sass-lang.com/documentation/variables#flow-control-scope)
+$color_bg0: null !default;
+$color_bg1: null !default;
+$color_bg2: null !default;
+$color_bg3: null !default;
+$color_bg4: null !default;
+
+$color_fg0: null !default;
+$color_fg1: null !default;
+$color_fg2: null !default;
+$color_fg3: null !default;
+$color_fg4: null !default;
+
+$color_accent: null !default;
+$color_accent_neutral: null !default;
+
+@if $mode == 'dark' {
+    @if $contrast == 'hard'   { $color_bg0: $GB_DARK0_HARD; }
+    @if $contrast == 'medium' { $color_bg0: $GB_DARK0;      }
+    @if $contrast == 'soft'   { $color_bg0: $GB_DARK0_SOFT; }
+
+    $color_bg1: $GB_DARK1;
+    $color_bg2: $GB_DARK2;
+    $color_bg3: $GB_DARK3;
+    $color_bg4: $GB_DARK4;
+
+    $color_fg0: $GB_LIGHT0;
+    $color_fg1: $GB_LIGHT1;
+    $color_fg2: $GB_LIGHT2;
+    $color_fg3: $GB_LIGHT3;
+    $color_fg4: $GB_LIGHT4;
+
+    @if $accent == 'red' {
+        $color_accent: $GB_BRIGHT_RED;
+        $color_accent_neutral: $GB_NEUTRAL_RED;
+    }
+    @if $accent == 'green' {
+        $color_accent: $GB_BRIGHT_GREEN;
+        $color_accent_neutral: $GB_NEUTRAL_GREEN;
+    }
+    @if $accent == 'yellow' {
+        $color_accent: $GB_BRIGHT_YELLOW;
+        $color_accent_neutral: $GB_NEUTRAL_YELLOW;
+    }
+    @if $accent == 'blue' {
+        $color_accent: $GB_BRIGHT_BLUE;
+        $color_accent_neutral: $GB_NEUTRAL_BLUE;
+    }
+    @if $accent == 'purple' {
+        $color_accent: $GB_BRIGHT_PURPLE;
+        $color_accent_neutral: $GB_NEUTRAL_PURPLE;
+    }
+    @if $accent == 'aqua' {
+        $color_accent: $GB_BRIGHT_AQUA;
+        $color_accent_neutral: $GB_NEUTRAL_AQUA;
+    }
+    @if $accent == 'orange' {
+        $color_accent: $GB_BRIGHT_ORANGE;
+        $color_accent_neutral: $GB_NEUTRAL_ORANGE;
+    }
+} @else if $mode == 'light' {
+    @if $contrast == 'hard'   { $color_bg0: $GB_LIGHT0_HARD; }
+    @else if $contrast == 'medium' { $color_bg0: $GB_LIGHT0;      }
+    @else if $contrast == 'soft'   { $color_bg0: $GB_LIGHT0_SOFT; }
+    @else { @error "Invalid contrst: #{$contrast}"; }
+
+    $color_bg1: $GB_LIGHT1;
+    $color_bg2: $GB_LIGHT2;
+    $color_bg3: $GB_LIGHT3;
+    $color_bg4: $GB_LIGHT4;
+
+    $color_fg0: $GB_DARK0;
+    $color_fg1: $GB_DARK1;
+    $color_fg2: $GB_DARK2;
+    $color_fg3: $GB_DARK3;
+    $color_fg4: $GB_DARK4;
+
+    @if $accent == 'red' {
+        $color_accent: $GB_FADED_RED;
+        $color_accent_neutral: $GB_NEUTRAL_RED;
+    }
+    @if $accent == 'green' {
+        $color_accent: $GB_FADED_GREEN;
+        $color_accent_neutral: $GB_NEUTRAL_GREEN;
+    }
+    @if $accent == 'yellow' {
+        $color_accent: $GB_FADED_YELLOW;
+        $color_accent_neutral: $GB_NEUTRAL_YELLOW;
+    }
+    @if $accent == 'blue' {
+        $color_accent: $GB_FADED_BLUE;
+        $color_accent_neutral: $GB_NEUTRAL_BLUE;
+    }
+    @if $accent == 'purple' {
+        $color_accent: $GB_FADED_PURPLE;
+        $color_accent_neutral: $GB_NEUTRAL_PURPLE;
+    }
+    @if $accent == 'aqua' {
+        $color_accent: $GB_FADED_AQUA;
+        $color_accent_neutral: $GB_NEUTRAL_AQUA;
+    }
+    @if $accent == 'orange' {
+        $color_accent: $GB_FADED_ORANGE;
+        $color_accent_neutral: $GB_NEUTRAL_ORANGE;
+    }
+} @else {
+    @error "Invalid mode: #{$mode}.";
+}
+
+$color_gray: $GB_GRAY;
+

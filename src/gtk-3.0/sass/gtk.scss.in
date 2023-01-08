@@ -2,6 +2,7 @@ $mode: '@mode@';
 $contrast: '@contrast@';
 $accent: '@accent@';
 
+@import '@sass_path@/_palette';
 @import '@sass_path@/_colors';
 @import '@sass_path@/_drawing';
 @import '@sass_path@/_common';
