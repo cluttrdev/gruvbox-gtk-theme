@@ -1,4 +1,24 @@
-assets_svg = 'assets.svg'
+accent_colors = {
+  'red': '#cc241d',
+  'green': '#98971a',
+  'yellow': '#d79921',
+  'blue': '#458588',
+  'purple': '#b16286',
+  'aqua': '#689d6a',
+  'orange': '#d65d0e',
+  }
+
+assets_svg_in = 'assets.svg.in'
+
+assets_svg_file = 'assets.svg'
+
+assets_svg = configure_file(
+  input : assets_svg_in,
+  output : assets_svg_file,
+  configuration : {
+    'accent' : accent
+    }
+  )
 
 gtk4_assets = []
 gtk4_hidpi_assets = []

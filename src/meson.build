@@ -1,26 +1,24 @@
-foreach mode : get_option('modes')
-  foreach contrast : get_option('contrasts')
-    foreach accent : get_option('accents')
-      variant = mode + '-' + contrast + '-' + accent
+mode = get_option('mode')
+contrast = get_option('contrast')
+accent = get_option('accent')
 
-      index_theme = configure_file(
-        input: 'index.theme.in',
-        output : 'index.theme.' + variant,
-        configuration : {
-          'variant_name' : variant,
-          }
-        )
+variant = mode + '-' + contrast + '-' + accent
 
-      install_dir = datadir / 'themes' / variant
+index_theme = configure_file(
+  input: 'index.theme.in',
+  output : 'index.theme.' + variant,
+  configuration : {
+    'variant_name' : variant,
+    }
+  )
 
-      install_data(
-        index_theme,
-        rename: 'index.theme',
-        install_dir : prefix / install_dir,
-        )
-    endforeach
-  endforeach
-endforeach
+install_dir = datadir / 'themes' / variant
+
+install_data(
+  index_theme,
+  rename: 'index.theme',
+  install_dir : prefix / install_dir,
+  )
 
 common_dirs = {
   'gtk3' : 'gtk-3.0',

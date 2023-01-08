@@ -6,23 +6,23 @@ option(
 )
 
 option(
-  'modes',
-  type: 'array',
-  choices: ['light',  'dark'],
-  description: 'List of theme modes to build',
+  'mode',
+  type: 'combo',
+  choices: ['light', 'dark'],
+  description: 'Theme mode to build',
 )
 
 option(
-  'contrasts',
-  type: 'array',
+  'contrast',
+  type: 'combo',
   choices: ['hard', 'medium', 'soft'],
-  description: 'List of theme contrast configurations to build',
+  description: 'Theme contrast configuration to build',
 )
 
 option(
-  'accents',
-  type: 'array',
+  'accent',
+  type: 'combo',
   choices: ['red', 'green', 'yellow', 'blue', 'purple', 'aqua', 'orange'],
-  description: 'List of theme accent color variants to build',
+  description: 'Theme accent color variant to build',
 )
 

@@ -93,7 +93,7 @@
        inkscape:swatch="solid">
       <stop
          id="stop2191"
-         class="accentClass-yellow" />
+         class="accentClass-@accent@" />
     </linearGradient>
     <linearGradient
        id="color_gray"

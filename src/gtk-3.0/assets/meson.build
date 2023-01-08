@@ -7,12 +7,14 @@ accent_colors = {
   'aqua': '#689d6a',
   'orange': '#d65d0e',
   }
-assets_svg_in = 'assets.svg.in'
-assets_svg = 'assets.svg'
 
-assets_svg_file = configure_file(
+assets_svg_in = 'assets.svg.in'
+
+assets_svg_file = 'assets.svg'
+
+assets_svg = configure_file(
   input : assets_svg_in,
-  output : assets_svg,
+  output : assets_svg_file,
   configuration : {
     'accent' : accent
     }
