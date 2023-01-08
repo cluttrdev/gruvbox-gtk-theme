@@ -1,11 +1,9 @@
-# render PNG assets
+# get PNG asset names once
 
 gtk3_asset_names = run_command(
   'cat', 'assets' / 'assets.txt',
   check : true
 ).stdout().split()
-
-subdir('assets')
 
 # compile CSS
 
@@ -45,6 +43,10 @@ foreach mode : get_option('modes')
         build_by_default : true,
         depend_files : sass_depend_files
         )
+
+      # render PNG assets for current variant
+
+      subdir('assets')
 
       # generate the gresource XML
 

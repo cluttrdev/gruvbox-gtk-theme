@@ -1,4 +1,22 @@
+accent_colors = {
+  'red': '#cc241d',
+  'green': '#98971a',
+  'yellow': '#d79921',
+  'blue': '#458588',
+  'purple': '#b16286',
+  'aqua': '#689d6a',
+  'orange': '#d65d0e',
+  }
+assets_svg_in = 'assets.svg.in'
 assets_svg = 'assets.svg'
+
+assets_svg_file = configure_file(
+  input : assets_svg_in,
+  output : assets_svg,
+  configuration : {
+    'accent' : accent
+    }
+  )
 
 gtk3_assets = []
 gtk3_hidpi_assets = []
