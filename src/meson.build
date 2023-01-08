@@ -4,15 +4,18 @@ accent = get_option('accent')
 
 variant = mode + '-' + contrast + '-' + accent
 
+theme_name = 'gruvbox-' + variant
+
 index_theme = configure_file(
   input: 'index.theme.in',
   output : 'index.theme.' + variant,
   configuration : {
-    'variant_name' : variant,
+    'theme_name' : theme_name,
+    'icon_theme_name' : 'gruvbox-' + mode + '-' + accent
     }
   )
 
-install_dir = datadir / 'themes' / variant
+install_dir = datadir / 'themes' / theme_name
 
 install_data(
   index_theme,
