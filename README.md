@@ -1,8 +1,8 @@
-# gruvbox-gtk-theme
+# gruvbox-theme
 
 This is a flat theme using the [gruvbox](https://github.com/morhetz/gruvbox) color palette.
 
-The theme is based on the Arc GTK Theme originally developed by [horst3180](https://github.com/horst3180/arc-theme)
+The theme is based on the Arc Theme originally developed by [horst3180](https://github.com/horst3180/arc-theme)
 and now maintained by [jnsh](https://github.com/jnsh/arc-theme).
 
 ## Installation
@@ -29,4 +29,8 @@ for build instructions, options, dependencies and other details.
 > You should have received a copy of the GNU General Public License
 > along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-For details see [COPYING](./COPYING)
+For details see [COPYING](./COPYING).
+
+## Preview
+
+![gtk3-widget-factory screenshot of the `gruvbox-dark-medium-yellow` variant](./res/preview-dark-medium-yellow.png)
