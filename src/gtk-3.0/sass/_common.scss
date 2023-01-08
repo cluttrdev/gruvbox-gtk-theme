@@ -4,8 +4,8 @@
 
 $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $backdrop_transition: 200ms ease-out;
-$asset_suffix: if($variant=='dark', '-dark', ''); // use dark assets in dark variant
-$darker_asset_suffix: if($variant=='darker', '-dark', $asset_suffix);
+$asset_suffix: if($mode == 'dark', '-dark', ''); // use dark assets in dark variant
+$darker_asset_suffix: if($mode=='dark', '-dark', $asset_suffix);
 
 * {
   background-clip: padding-box;
@@ -36,7 +36,7 @@ $darker_asset_suffix: if($variant=='darker', '-dark', $asset_suffix);
 //
 .background {
   color: $fg_color;
-  background-color: if($transparency == 'true', transparentize($bg_color, 0.001), $bg_color); // without this headerbar transparency doesn't seem to work
+  background-color: $bg_color;
 }
 
 *:disabled { -gtk-icon-effect: dim; }
@@ -234,7 +234,7 @@ entry {
                                           (search-missing, $error_color, $error_fg_color) {
     &.#{$e_type} {
       color: $e_fg_color;
-      border-color: if($variant!='dark', $e_color, $entry_border);
+      border-color: if($mode != 'dark', $e_color, $entry_border);
       background-color: mix($e_color, $base_color, 60%);
 
       image { color: $e_fg_color; }
@@ -387,7 +387,7 @@ button {
   &:active, &:checked {
     @include button(active);
 
-    background-clip: if($variant!='dark', border-box, padding-box);
+    background-clip: if($mode != 'dark', border-box, padding-box);
     transition-duration: 50ms;
 
     &:not(:disabled) label:disabled { color: inherit; opacity: 0.6; }
@@ -566,10 +566,10 @@ button {
                                     to(transparent));
     background-size: 6px 6px, 6px 6px;
     background-repeat: no-repeat;
-    @if $variant != 'dark' { background-position: right 3px, right 4px; }
+    @if $mode != 'dark' { background-position: right 3px, right 4px; }
     @else { background-position: right 3px, right 2px; }
     &:dir(rtl) {
-      @if $variant != 'dark' { background-position: left 3px, left 4px; }
+      @if $mode != 'dark' { background-position: left 3px, left 4px; }
       @else { background-position: left 3px, left 2px; }
     }
   }
@@ -618,7 +618,7 @@ toolbar.inline-toolbar toolbutton {
 }
 
 // Some crazy linking stuff
-@mixin linking_rules($a:0.7, $var:$variant, $vert:'false', $entry_rules:'true', $button_rules:'true',
+@mixin linking_rules($a:0.7, $var:$mode, $vert:'false', $entry_rules:'true', $button_rules:'true',
                      $e_border:$entry_border, $b_border:$button_border) {
 
   $_border: if($vert=='false', left, top);
@@ -681,7 +681,7 @@ toolbar.inline-toolbar toolbutton {
 }
 
 // special case, because path-bars are bugged
-@mixin pathbar_linking_rules($sep_color:if($variant!='dark', transparentize($button_border, 0.6), transparentize($button_border, 0.5))) {
+@mixin pathbar_linking_rules($sep_color:if($mode != 'dark', transparentize($button_border, 0.6), transparentize($button_border, 0.5))) {
 
   > button + button { border-left-style: none; }
 
@@ -904,7 +904,7 @@ spinbutton {
     > button.up:dir(rtl):hover:not(:active),
     > entry + button:not(:active):hover { box-shadow: none; }
 
-    > entry:focus + button { border-left-color: if($variant!='dark', $selected_bg_color, $entry_border); }
+    > entry:focus + button { border-left-color: if($mode != 'dark', $selected_bg_color, $entry_border); }
 
     > entry:drop(active) + button { border-left-color: $drop_target_color; }
 
@@ -930,7 +930,7 @@ spinbutton {
 
     button.up { border-radius: 3px 3px 0 0; }
 
-    > entry:focus + button { border-top-color: if($variant!='dark', $selected_bg_color, $entry_border); }
+    > entry:focus + button { border-top-color: if($mode != 'dark', $selected_bg_color, $entry_border); }
 
     > entry:drop(active) + button { border-top-color: $drop_target_color; }
   }
@@ -1063,7 +1063,7 @@ actionbar > revealer >  box {
 //
 // Headerbars
 //
-$_header_radius: if($variant=='light' or $variant=='lighter', 4px, 3px);
+$_header_radius: if($mode == 'light', 4px, 3px);
 
 headerbar,
 %titlebar {
@@ -1298,7 +1298,7 @@ headerbar {
 
     &:focus {
       @include entry(header-focus);
-      background-clip: if($variant=='light' or $variant=='lighter', border-box, padding-box);
+      background-clip: if($mode == 'light', border-box, padding-box);
 
       image { color: $selected_fg_color; }
     }
@@ -1319,7 +1319,7 @@ headerbar {
                                             (error, $error_color, $error_fg_color) {
       &.#{$e_type} {
         color: $e_fg_color;
-        border-color: if($variant=='light' or $variant=='lighter', $e_color, $header_entry_border);
+        border-color: if($mode == 'light', $e_color, $header_entry_border);
         background-color: mix($e_color, $header_bg, 60%);
 
         &:focus {
@@ -1344,7 +1344,7 @@ headerbar {
     &:hover { @include button(header-hover); }
     &:active, &:checked {
       @include button(header-active);
-      background-clip: if($variant=='light' or $variant=='lighter', border-box, padding-box);
+      background-clip: if($mode == 'light', border-box, padding-box);
     }
     &:disabled { @include button(header-insensitive); }
     &:disabled:active, &:disabled:checked { @include button(header-insensitive-active); }
@@ -1410,7 +1410,7 @@ headerbar {
   // use linking rules for entries only
   .linked:not(.vertical):not(.path-bar) {
     @include linking_rules( $a:0.5,
-                            $var:if($variant=='light' or $variant=='lighter', 'light', 'dark'),
+                            $var:if($mode == 'light', 'light', 'dark'),
                             $button_rules:'false',
                             $e_border:$header_entry_border,
                             $b_border:$header_button_border );
@@ -1466,7 +1466,7 @@ headerbar {
     > button:first-child:hover:not(:active),
     > entry + button:not(:active):hover { box-shadow: none; }
 
-    > entry:focus + button { border-left-color: if($variant=='light' or $variant=='lighter', $selected_bg_color, $header_entry_border); }
+    > entry:focus + button { border-left-color: if($mode == 'light', $selected_bg_color, $header_entry_border); }
   }
 
   // Headerbar ComboBoxes
@@ -1485,13 +1485,13 @@ headerbar {
         border-right-style: none;
 
         &:focus { box-shadow: none; }
-        @if $variant=='light' or $variant=='lighter' { &:focus { box-shadow: 1px 0 $selected_bg_color; } }
+        @if $mode == 'light' { &:focus { box-shadow: 1px 0 $selected_bg_color; } }
       }
       &:dir(rtl) {
         border-left-style: none;
 
         &:focus { box-shadow: none; }
-        @if $variant=='light' or $variant=='lighter' { &:focus { box-shadow: -1px 0 $selected_bg_color; } }
+        @if $mode == 'light' { &:focus { box-shadow: -1px 0 $selected_bg_color; } }
       }
     }
     > .linked > button.combo {
@@ -1516,20 +1516,20 @@ headerbar {
   }
 
   progressbar {
-    trough { background-color: if($variant=='light', opacify($header_button_border, 0.05), $header_button_border); }
+    trough { background-color: if($mode == 'light', opacify($header_button_border, 0.05), $header_button_border); }
 
     &:backdrop { opacity: 0.75; }
   }
 
   // Headerbar Scale
   scale {
-    $_trough_bg: if($variant=='light' or $variant=='lighter', opacify($header_button_border, 0.05), $header_button_border);
+    $_trough_bg: if($mode == 'light', opacify($header_button_border, 0.05), $header_button_border);
 
     &:backdrop { opacity: 0.75; }
 
     slider {
-      $_slider_border: if($variant=='light' or $variant=='lighter', opacify($header_button_border, 0.2), opacify($header_button_border, 0.3));
-      $_slider_bg: if($variant=='light' or $variant=='lighter', opacify($header_button_bg,1), lighten(opacify($header_bg,1), 10%));
+      $_slider_border: if($mode == 'light', opacify($header_button_border, 0.2), opacify($header_button_border, 0.3));
+      $_slider_bg: if($mode == 'light', opacify($header_button_bg,1), lighten(opacify($header_bg,1), 10%));
 
       background-color: $_slider_bg;
       border-color: $_slider_border;
@@ -1550,7 +1550,7 @@ headerbar {
     trough {
       background-color: $_trough_bg;
 
-      &:disabled { background-color: if($variant=='light' or $variant=='lighter', transparentize($_trough_bg, 0.05), transparentize($_trough_bg, 0.1)); }
+      &:disabled { background-color: if($mode == 'light', transparentize($_trough_bg, 0.05), transparentize($_trough_bg, 0.1)); }
     }
   }
 }
@@ -1701,8 +1701,8 @@ treeview.view {
       border-radius: 0;
       border-image: linear-gradient(to bottom,
                                     $base_color 20%,
-                                    transparentize(if($variant != 'dark', black, white), 0.89) 20%,
-                                    transparentize(if($variant != 'dark', black, white), 0.89) 80%,
+                                    transparentize(if($mode != 'dark', black, white), 0.89) 20%,
+                                    transparentize(if($mode != 'dark', black, white), 0.89) 80%,
                                     $base_color 80%) 0 1 0 0 / 0 1px 0 0 stretch;
 
       &:hover { color: $selected_bg_color; }
@@ -1768,7 +1768,7 @@ menubar,
 
 menu,
 .menu {
-  $_menu_bg: if($variant!='dark', $base_color, $bg_color);
+  $_menu_bg: if($mode != 'dark', $base_color, $bg_color);
   margin: 4px;
   padding: 0;
   border-radius: 0;
@@ -1855,7 +1855,7 @@ menu,
 //
 // Popovers
 //
-$_popover_bg: if($variant!='dark', $base_color, $bg_color);
+$_popover_bg: if($mode != 'dark', $base_color, $bg_color);
 
 popover,
 popover.background {
@@ -1864,7 +1864,7 @@ popover.background {
   background-clip: border-box;
   background-color: $_popover_bg;
 
-  box-shadow: 0 2px 6px 1px if($variant!='dark', transparentize(black, 0.93), transparentize(black, 0.65));
+  box-shadow: 0 2px 6px 1px if($mode != 'dark', transparentize(black, 0.93), transparentize(black, 0.65));
 
   .csd &, & { border: 1px solid darken($borders_color, 5%); }
 
@@ -2107,7 +2107,7 @@ scrollbar {
         min-width: 4px;
         min-height: 4px;
         background-color: mix($fg_color, $bg_color, 70%);
-        border: 1px solid if($variant != 'dark', transparentize(white, 0.4), transparentize(black, 0.7));
+        border: 1px solid if($mode != 'dark', transparentize(white, 0.4), transparentize(black, 0.7));
       }
 
       &.horizontal slider {
@@ -2304,7 +2304,7 @@ scale {
 
   // Trough
   trough {
-    $_scale_trough_bg: if($variant != 'dark', $button_border, darken($bg_color, 5%));
+    $_scale_trough_bg: if($mode != 'dark', $button_border, darken($bg_color, 5%));
 
     outline-offset: 2px;
     -gtk-outline-radius: 4.5px;
@@ -2316,7 +2316,7 @@ scale {
 
     //OSD troughs
     .osd & {
-      background-color: if($variant == 'lighter', $osd_button_border, lighten($osd_bg_color, 7%));
+      background-color: if($mode == 'light', $osd_button_border, lighten($osd_bg_color, 7%));
 
       highlight {
         background-color: $selected_bg_color;
@@ -2361,7 +2361,7 @@ scale {
   }
 
   slider {
-    $_slider_border: if($variant!='dark', transparentize(darken($button_border,25%), 0.5), darken($button_border,2%));
+    $_slider_border: if($mode != 'dark', transparentize(darken($button_border,25%), 0.5), darken($button_border,2%));
 
     background-color: $button_bg;
     border: 1px solid $_slider_border;
@@ -2504,7 +2504,7 @@ progressbar {
   trough {
     border: none;
     border-radius: 3px;
-    background-color: if($variant != 'dark', $button_border, darken($bg_color, 5%));
+    background-color: if($mode != 'dark', $button_border, darken($bg_color, 5%));
 
     row:selected &,
     infobar & { background-color: transparentize(black, 0.8); }
@@ -2541,7 +2541,7 @@ levelbar {
     border: none;
     padding: 3px;
     border-radius: 3px;
-    background-color: if($variant != 'dark', $button_border, darken($bg_color, 5%));
+    background-color: if($mode != 'dark', $button_border, darken($bg_color, 5%));
   }
 
   block:not(.empty) {
@@ -2562,8 +2562,8 @@ levelbar {
     background-color: $success_color;
   }
   block.empty {
-    background-color: if($variant!='dark', transparentize($fg_color,0.8), $base_color);
-    border-color: if($variant!='dark', transparentize($fg_color,0.8), $base_color);
+    background-color: if($mode != 'dark', transparentize($fg_color,0.8), $base_color);
+    border-color: if($mode != 'dark', transparentize($fg_color,0.8), $base_color);
   }
 }
 
@@ -2649,7 +2649,7 @@ row {
 
   &.activatable {
     &.has-open-popup,
-    &:hover { background-color: if($variant != 'dark', transparentize(black, 0.95), transparentize(white, 0.97)); }
+    &:hover { background-color: if($mode != 'dark', transparentize(black, 0.95), transparentize(white, 0.97)); }
 
     &:active { color: $fg_color; }
     &:disabled {
@@ -3168,7 +3168,7 @@ colorswatch {
     overlay {
       color: transparentize(white, 0.3);
       &:hover {
-        border-color: if($variant != 'dark', transparentize(black, 0.5), $borders_color);
+        border-color: if($mode != 'dark', transparentize(black, 0.5), $borders_color);
       }
     }
   }
@@ -3178,13 +3178,13 @@ colorswatch {
     overlay {
       color: transparentize(black, 0.3);
       &:hover {
-        border-color: if($variant != 'dark', transparentize(black, 0.7), $borders_color);
+        border-color: if($mode != 'dark', transparentize(black, 0.7), $borders_color);
       }
     }
   }
 
   overlay {
-    border: 1px solid if($variant != 'dark', transparentize(black, 0.85), $borders_color);
+    border: 1px solid if($mode != 'dark', transparentize(black, 0.85), $borders_color);
     &:hover { background-color: transparentize(white, 0.8) }
   }
 
@@ -3271,7 +3271,7 @@ button.circular-button {
   background-color: $base_color;
   border: 1px solid $borders_color;
   border-radius: 2.5px;
-  box-shadow: inset 0px -2px 0px if($variant!='dark', transparentize(black, 0.95), transparentize(black, 0.85));
+  box-shadow: inset 0px -2px 0px if($mode != 'dark', transparentize(black, 0.95), transparentize(black, 0.85));
 }
 
 stackswitcher button {
@@ -3292,13 +3292,13 @@ stackswitcher button {
 //
 
 decoration {
-  border-radius: if($variant=='light' or $variant=='lighter', 4px 4px 0 0, 3px 3px 0 0);
+  border-radius: if($mode == 'light', 4px 4px 0 0, 3px 3px 0 0);
   border-width: 0px;
 
-  $_wm_border: if($variant!='dark', transparentize(black, 0.9), transparentize(black, 0.45));
+  $_wm_border: if($mode != 'dark', transparentize(black, 0.9), transparentize(black, 0.45));
 
-  box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', darken($header_bg, 7%), $_wm_border),
-              0 8px 8px 0 if($variant !='dark', opacify($_wm_border, 0.1), transparentize($_wm_border, 0.2));
+  box-shadow: 0 0 0 1px if($mode == 'dark', darken($header_bg, 7%), $_wm_border),
+              0 8px 8px 0 if($mode != 'dark', opacify($_wm_border, 0.1), transparentize($_wm_border, 0.2));
 
   // this is used for the resize cursor area
   margin: 10px;
@@ -3306,9 +3306,9 @@ decoration {
   &:backdrop {
     // the transparent shadow here is to enforce that the shadow extents don't
     // change when we go to backdrop, to prevent jumping windows
-    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', transparentize(darken($header_bg, 7%), 0.1), $_wm_border),
+    box-shadow: 0 0 0 1px if($mode == 'dark', transparentize(darken($header_bg, 7%), 0.1), $_wm_border),
                 0 8px 8px 0 transparent,
-                0 5px 5px 0 if($variant !='dark', opacify($_wm_border, 0.1), transparentize($_wm_border, 0.2));
+                0 5px 5px 0 if($mode != 'dark', opacify($_wm_border, 0.1), transparentize($_wm_border, 0.2));
 
     transition: $backdrop_transition;
   }
@@ -3323,11 +3323,11 @@ decoration {
   .tiled-bottom &,
   .tiled-left & {
     border-radius: 0;
-    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', darken($header_bg, 7%), $_wm_border),
+    box-shadow: 0 0 0 1px if($mode == 'dark', darken($header_bg, 7%), $_wm_border),
                 0 0 0 20px transparent; //transparent control workaround -- GTK issue #3670
 
     &:backdrop {
-      box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', darken($header_bg, 7%), $_wm_border),
+      box-shadow: 0 0 0 1px if($mode == 'dark', darken($header_bg, 7%), $_wm_border),
                   0 0 0 20px transparent; // GTK issue #3670
     }
   }
@@ -3338,8 +3338,8 @@ decoration {
   // server-side decorations as used by mutter
   .ssd &,
   .ssd &:backdrop {
-    border-radius: if($variant=='light' or $variant=='lighter', 4px 4px 0 0, 3px 3px 0 0);
-    box-shadow: 0 0 0 1px if($variant == 'dark' or $variant == 'darker', transparentize(black, 0.35), $_wm_border);
+    border-radius: if($mode == 'light', 4px 4px 0 0, 3px 3px 0 0);
+    box-shadow: 0 0 0 1px if($mode == 'dark', transparentize(black, 0.35), $_wm_border);
   }
   .ssd.maximized &,
   .ssd.maximized &:backdrop {
@@ -3349,12 +3349,12 @@ decoration {
 
   .csd.popup & {
     border-radius: 2px;
-    box-shadow: 0 3px 6px if($variant != 'dark', $_wm_border, transparentize($_wm_border, 0.1)),
-                0 0 0 1px if($variant != 'dark', $_wm_border, darken($bg_color, 10%));
+    box-shadow: 0 3px 6px if($mode != 'dark', $_wm_border, transparentize($_wm_border, 0.1)),
+                0 0 0 1px if($mode != 'dark', $_wm_border, darken($bg_color, 10%));
   }
   tooltip.csd & {
     border-radius: 2px;
-    box-shadow: 0 1px 3px 1px if($variant != 'dark', $_wm_border, transparentize($_wm_border, 0.3));
+    box-shadow: 0 1px 3px 1px if($mode != 'dark', $_wm_border, transparentize($_wm_border, 0.3));
   }
   messagedialog.csd & {
     border-radius: 3px;

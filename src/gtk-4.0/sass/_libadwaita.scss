@@ -518,7 +518,7 @@ row.combo {
 
   &:not(:selected).activatable {
     &:hover {
-      background-color: if($variant != 'dark', mix($base_color, black, 95%), mix($base_color, white, 97%));
+      background-color: if($mode != 'dark', mix($base_color, black, 95%), mix($base_color, white, 97%));
     }
 
     &:active {
@@ -676,7 +676,7 @@ toast {
     @extend %osd_button;
   }
 
-  @if $variant == 'lighter' {
+  @if $mode == 'light' {
     box-shadow: 0 0 0 1px $osd_borders_color;
   }
 }
@@ -699,7 +699,7 @@ statuspage {
         color: gtkalpha(currentColor, 0.55);
 
         &:disabled {
-          opacity: if($variant !='dark', 0.45, 0.55);
+          opacity: if($mode != 'dark', 0.45, 0.55);
         }
 
         &:not(:last-child) {
@@ -746,7 +746,7 @@ statuspage {
       background-color: gtkalpha(currentColor, .1);
       color: $osd_fg_color;
 
-      @if $variant == 'lighter' {
+      @if $mode == 'light' {
         box-shadow: 0 0 0 1px $osd_borders_color;
       } @else {
         box-shadow: none;
@@ -766,7 +766,7 @@ statuspage {
     transition: $button_transition;
 
     &:hover {
-      background-color: if($variant != 'dark', mix($base_color, black, 95%), mix($base_color, white, 97%));
+      background-color: if($mode != 'dark', mix($base_color, black, 95%), mix($base_color, white, 97%));
     }
 
     &:active {
@@ -968,7 +968,7 @@ dnd tab {
     background-image: $tab_needs_attention_gradient;
   }
 
-    box-shadow: 0 2px 6px 1px if($variant!='dark', transparentize(black, 0.93), transparentize(black, 0.65)),
+    box-shadow: 0 2px 6px 1px if($mode != 'dark', transparentize(black, 0.93), transparentize(black, 0.65)),
                 0 0 0 1px darken($borders_color, 5%);
 
   margin: 25px;

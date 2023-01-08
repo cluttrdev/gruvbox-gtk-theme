@@ -28,10 +28,10 @@
   // focused entry
   //
     color: $text_color;
-    border-color: if($variant!='dark', $selected_bg_color, $button_border);
+    border-color: if($mode != 'dark', $selected_bg_color, $button_border);
     background-color: $entry_bg;
 
-    @if $variant == 'dark' {
+    @if $mode == 'dark' {
       box-shadow: inset 1px 0 $selected_bg_color,
                   inset -1px 0 $selected_bg_color,
                   inset 0 1px $selected_bg_color,
@@ -65,7 +65,7 @@
   // focused header-bar entry
   //
     color: $selected_fg_color;
-    border-color: if($variant=='light' or $variant=='lighter', $selected_bg_color, transparent);
+    border-color: if($mode == 'light', $selected_bg_color, transparent);
     background-color: $selected_bg_color;
   }
 
@@ -139,7 +139,7 @@
   // pushed button
   //
     color: $selected_fg_color;
-    border-color: if($variant!='dark', $selected_bg_color, $button_border);
+    border-color: if($mode != 'dark', $selected_bg_color, $button_border);
     background-color: $selected_bg_color;
   }
 
@@ -189,7 +189,7 @@
   // pushed header-bar button
   //
     color: $selected_fg_color;
-    border-color: if($variant=='light' or $variant=='lighter', $selected_bg_color, transparent);
+    border-color: if($mode == 'light', $selected_bg_color, transparent);
     background-color: $selected_bg_color;
   }
 

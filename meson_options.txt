@@ -6,16 +6,23 @@ option(
 )
 
 option(
-  'variants',
+  'modes',
   type: 'array',
-  choices: ['light', 'darker', 'dark', 'lighter'],
-  description: 'List of theme variants to build',
+  choices: ['light',  'dark'],
+  description: 'List of theme modes to build',
 )
 
 option(
-  'transparency',
-  type: 'boolean',
-  value: true,
-  description: 'Enable or disable transparency',
+  'contrasts',
+  type: 'array',
+  choices: ['hard', 'medium', 'soft'],
+  description: 'List of theme contrast configurations to build',
+)
+
+option(
+  'accents',
+  type: 'array',
+  choices: ['red', 'green', 'yellow', 'blue', 'purple', 'aqua', 'orange'],
+  description: 'List of theme accent color variants to build',
 )
 

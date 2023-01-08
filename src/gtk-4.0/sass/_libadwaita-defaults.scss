@@ -52,10 +52,10 @@
 @define-color card_shade_color #{$base_color};
 
 // Popovers
-@define-color popover_bg_color #{if($variant!='dark', $base_color, $bg_color)};
+@define-color popover_bg_color #{if($mode!='dark', $base_color, $bg_color)};
 @define-color popover_fg_color #{$fg_color};
 
 // Miscellaneous
 @define-color shade_color #{transparentize(black, 0.8)};
-@define-color scrollbar_outline_color #{if($variant != 'dark', white, transparentize(black, .5))};
+@define-color scrollbar_outline_color #{if($mode != 'dark', white, transparentize(black, .5))};
 

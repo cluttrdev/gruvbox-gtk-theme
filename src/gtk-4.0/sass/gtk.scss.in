@@ -1,5 +1,6 @@
-$variant: '@variant@';
-$transparency: '@transparency@';
+$mode: '@mode@';
+$contrast: '@contrast@';
+$accent: '@accent@';
 
 @import "@sass_path@/_colors";
 @import "@sass_path@/_drawing";
