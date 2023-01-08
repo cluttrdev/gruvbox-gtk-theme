@@ -9,6 +9,7 @@ option(
   'mode',
   type: 'combo',
   choices: ['light', 'dark'],
+  value: 'dark',
   description: 'Theme mode to build',
 )
 
@@ -16,6 +17,7 @@ option(
   'contrast',
   type: 'combo',
   choices: ['hard', 'medium', 'soft'],
+  value: 'medium',
   description: 'Theme contrast configuration to build',
 )
 
@@ -23,6 +25,7 @@ option(
   'accent',
   type: 'combo',
   choices: ['red', 'green', 'yellow', 'blue', 'purple', 'aqua', 'orange'],
+  value: 'yellow',
   description: 'Theme accent color variant to build',
 )
 
