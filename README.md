@@ -1,4 +1,4 @@
-# gruvbox-theme
+# gruvbox-gtk-theme
 
 This is a flat theme using the [gruvbox](https://github.com/morhetz/gruvbox) color palette.
 
